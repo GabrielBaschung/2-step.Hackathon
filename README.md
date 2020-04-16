@@ -1,2 +1,2 @@
 # 2-step.Hackathon
-A 2-step-PHP-Authentification
+2-Schritte-Verifizierung
