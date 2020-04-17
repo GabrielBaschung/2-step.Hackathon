@@ -1,12 +1,7 @@
 <?php
-// ------------------- CONTROLLER -------------------
-session_start(); // Start einer neuen, oder Weiterführung einer bestehenden Session
-// Alle Site-relevanten Werte (base-url, DB-Einstellungen) sind in config.php zentral gespeichert.
+session_start();
 require_once('system/config.php');
-// Alle DB-Abfragen sind in data.php zusammengefasst.
 require_once('system/data.php');
-// Die Verwaltung der Session wiederholt sich auf allen Seiten (ausser login und register)
-//   und kann daher in einer zentalen Datei zusammengefasst werden.
 require_once('templates/session_handler.php');
 
 ?>

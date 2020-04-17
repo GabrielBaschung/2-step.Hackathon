@@ -1,17 +1,13 @@
 <?php
-// ------------------- CONTROLLER -------------------
-session_start(); // Start einer neuen, oder Weiterführung einer bestehenden Session
-// Alle Site-relevanten Werte (base-url, DB-Einstellungen) sind in config.php zentral gespeichert.
+session_start();
 require_once('system/config.php');
-// Alle DB-Abfragen sind in data.php zusammengefasst.
 require_once('system/data.php');
-// Die Verwaltung der Session erledigen wir hier nicht über eine externe Datei, sondern direkt im Controller
-// Wir prüfen, ob es eine Session-Variable $_SESSION['userid'] gibt.
 if(isset($_SESSION['userid'])) {
-  // Falls es eine solche Variable gibt, zerstören wir sie...
   unset($_SESSION['userid']);
-  // ... und beenden gleich darauf die Session.
-  // Ergebnis: Der User ist ausgeloggt.
+  session_destroy();
+}
+if(isset($_SESSION['verification'])){
+  unset($_SESSION['verification']);
   session_destroy();
 }
 
@@ -36,18 +32,19 @@ if(isset($_POST['login_button'])){
     $msg .= "Bitte geben Sie ein Passwort ein.<br>";
     $logindaten_korrekt = false;
   }
-  //Wenn nun die Logindaten immer noch korrekt sind, wird die Funktion login ausgeführt, die unter system/data.php ist
+  // Wenn nun die Logindaten immer noch korrekt sind, wird die Funktion login ausgeführt, die unter system/data.php ist
   if($logindaten_korrekt){
     $user = login($email , $password);
     if($user){
-          $_SESSION['userid'] = $user['id'];
-          header('Location: index.php');
-      exit;
+        $_SESSION['verification'] = $user['id'];
+        header('Location: code_login.php');
+        exit;
     }else{
       $msg = "Sie haben wohl einen Fehler gemacht.";
     }
   }
-}
+  }
+
 
 ?>
 <!DOCTYPE html>
@@ -68,11 +65,11 @@ if(isset($_POST['login_button'])){
       <p style="text-align: center;">Bitte melde dich an!</p>
       <div style="margin-left: 32vw; margin-right: 32vw;">
       <div class="form-style-5">
-        <form action="<?php echo $_SERVER['PHP_SELF']; // $_SERVER['PHP_SELF'] gibt die Adresse der aktuellen Datei aus ?>" method="post">
+        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
             <fieldset>
             <legend><span class="number">1</span> Persönliche Informationen</legend>
-            <input type="email" name="email" id="id_email" placeholder="Your Email *">
-            <input type="password" name="password" id="id_password" placeholder="Your Password *">
+            <input type="email" name="email" id="email" placeholder="Your Email *">
+            <input type="password" name="password" id="password" placeholder="Your Password *">
             </fieldset>
           <input type="submit" name="login_button" value="Anmelden" />
         </form>

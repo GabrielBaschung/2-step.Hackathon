@@ -31,29 +31,13 @@ function login($email, $password){
 	}
 }
 
-
-// Registrieren
-/* Neue Benutzerdaten werden in die User Datenbank gespeichert */
 function register($email, $password, $firstname, $lastname){
-	$db = get_db_connection();  // DB-Verbindung herstellen (s. login())
-	// Das PHP-Datenbank-Interface PDO stellt sog. prpared statements zur Verfügung.
-	// siehe: https://www.php-einfach.de/mysql-tutorial/crashkurs-pdo/
-	// Dabei stehen im SQL-Statement Fragezeichen als Platzhalter für die zu übertragenden Werte.
+	$db = get_db_connection();
 	$sql = "INSERT INTO Benutzerdaten (email, password, firstname, lastname) VALUES (?, ?, ?, ?);";
-	// Im folgenden Schritt wird das Statement mit $db->prepare($sql) vorbereitet und in einer Variablen gespeichert.
 	$stmt = $db->prepare($sql);
-	// Mit der execute()-Methode wird die Abfrage ausgeführt.
-	// Dabei müssen die einzusetzenden Werte als Array übermittelt werden.
-	// Innerhalb des Arrays müssen die Werte die richtige Reihenfolge haben.
-	// Da es sich bei dem Statement um einen INSERT-Befehl handelt,
-	//   wird als Ergebnis true fur eine erfolgreiche Speicherung
-	//   und false für eine misslungene Speicherung zurückgegeben
 	return $stmt->execute(array($email, $password, $firstname, $lastname));
 }
-/************************ SELECT BEFEHLE ************************/
-// User Daten auslesen
-/* Die Daten des eingeloggten Benutzers werden via User_Id ausgelesen */
-// Die Funktion verläuft in einer etwas verkürzten Version analog zur login()-Funktion
+
 function get_user_by_id($id){
 	$db = get_db_connection();
 	$sql = "SELECT * FROM Benutzerdaten WHERE id = $id;";
@@ -61,8 +45,7 @@ function get_user_by_id($id){
 	return $result->fetch();
 }
 
-
-function does_email_exist($email){
+function email_vergeben($email){
 	$db = get_db_connection(); // DB-Verbindung herstellen (s. login())
 	$sql = "SELECT * FROM Benutzerdaten where email = '$email';";
 	$result = $db->query($sql);

@@ -7,9 +7,6 @@
 <?php } ?>
 
 <!-- Falls was nicht klappt oder so, wird diese Nachricht ausgegeben -->
-
-
-
   <?php if(isset($msg)){ ?>
     <div style="background-color: #F31431; width: 30vw; display: table; margin: auto; border-radius: 20px;" >
       <p style="text-align: center; vertical-align: middle; font-size: 1rem; font-family: 'Roboto', sans-serif; color: white;"> <?php echo $msg;?> </p>
