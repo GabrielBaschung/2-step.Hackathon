@@ -8,6 +8,8 @@ if(isset($_SESSION['userid'])) {
   session_destroy();
 }
 
+echo md5("12345");
+
 $logged_in = false;
 $log_in_out_text = "Anmelden";
 

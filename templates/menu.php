@@ -8,13 +8,17 @@ require_once('templates/session_handler.php');
   <div class="container">
   <div style="margin-left: 10vw; padding-top: 30px;">
     <a class="title" href="<?php echo $base_url; //?>">2-Step</a>
-    <div id="mmp_forum_navbar">
+    <div id="navbar">
       <div style="text-align: right; margin-right: 10vw;">
         <a style="margin: 30px;" href="<?php echo $base_url;?>index.php">Home</a>
+        <?php if($logged_in){ ?>
+                <a style="margin: 30px;" href="<?php echo $base_url ?>mein_konto.php">Mein Konto</a>
+        <?php } ?>
         <a style="margin: 30px;" href="<?php echo $base_url ?>login.php"><?php echo $log_in_out_text;?></a>
 <?php if(!$logged_in){ //Wenn man nicht eingeloggt ist, wird angezeigt, dass man sich registrieren kann?>
         <a style="margin: 30px;" href="<?php echo $base_url ?>register.php">Registrieren</a>
 <?php } ?>
+
       </div>
     </div>
   </div>

@@ -31,6 +31,13 @@ function login($email, $password){
 	}
 }
 
+function edit($email, $password, $firstname, $lastname){
+	$db = get_db_connection();
+	$sql = "UPDATE Benutzerdaten SET email=?, password=?, firstname=?, lastname=? WHERE id=$id;";
+	$stmt = $db->prepare($sql);
+	return $stmt->execute(array($email, $password, $firstname, $lastname));
+}
+
 function register($email, $password, $firstname, $lastname){
 	$db = get_db_connection();
 	$sql = "INSERT INTO Benutzerdaten (email, password, firstname, lastname) VALUES (?, ?, ?, ?);";
