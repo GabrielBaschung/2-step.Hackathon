@@ -12,13 +12,12 @@ require_once('templates/session_handler.php');
 <head>
 
   <?php
-    require_once('templates/page_head.php'); // Inhalt des <head>-Elements aus externer PHP-Datei
+    require_once('templates/page_head.php');
   ?>
 
 </head>
 <body>
-  <!-- Navigation -->
-  <?php require_once('templates/menu.php'); // Navigation aus externer PHP-Datei ?>
+  <?php require_once('templates/menu.php'); ?>
 
 
   <div>

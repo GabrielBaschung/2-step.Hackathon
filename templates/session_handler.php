@@ -1,15 +1,13 @@
 <?php
-if(isset($_SESSION['verification'])){ // Prüfung, ob die Session-Variable "userid" besteht.
-  // Die get_user_by_id()-Funktion aus system/data.php holt die Daten für eine
-  //   bestimmte user_id aus der DB.
+if(isset($_SESSION['verification'])){
   $verification = get_user_by_id($_SESSION['verification']);
   $user_id_ver = $verification['id'];
-  $logged_in = false;           // $logged_in wird in templates/menu.php verwendet.
-  $log_in_out_text = "Anmelden"; // $log_in_out_text wird in templates/menu.php verwendet.
+  $logged_in = false;
+  $log_in_out_text = "Anmelden";
 }else if(isset($_SESSION['userid'])){
   $user = get_user_by_id($_SESSION['userid']);
   $user_id = $user['id'];
-  $logged_in = true;           // $logged_in wird in templates/menu.php verwendet.
+  $logged_in = true;
   $log_in_out_text = "Logout";
 }else{
   $logged_in = false;

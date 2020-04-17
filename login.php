@@ -27,7 +27,7 @@ if(isset($_POST['login_button'])){
   }
   //Überprüfung des Passwortfeldes, wenn es nicht leer ist, geht es weiter und das Passwort wird in der Variable $password gespeichert
   if(!empty($_POST['password'])){
-    $password = $_POST['password'];
+    $password = md5($_POST['password']);
   }else{
     $msg .= "Bitte geben Sie ein Passwort ein.<br>";
     $logindaten_korrekt = false;
@@ -40,7 +40,7 @@ if(isset($_POST['login_button'])){
         header('Location: code_login.php');
         exit;
     }else{
-      $msg = "Sie haben wohl einen Fehler gemacht.";
+      $msg = "Es ist ein Fehler aufgetreten.";
     }
   }
   }

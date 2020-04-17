@@ -8,8 +8,6 @@ if(isset($_SESSION['userid'])) {
   session_destroy();
 }
 
-echo md5("12345");
-
 $logged_in = false;
 $log_in_out_text = "Anmelden";
 
@@ -40,14 +38,14 @@ if(isset($_POST['register_button'])){
   }
   //Passwort
   if(!empty($_POST['password'])){
-    $password = $_POST['password'];
+    $password = md5($_POST['password']);
   }else{
     $msg .= "Bitte geben Sie Ihr Passwort ein.";
     $registrierungsdaten_korrekt = false;
   }
   //Passwort bestätigen
-  if(!empty($_POST['password_confirm']) AND $_POST['password_confirm'] == $password){
-    $password_confirm = $_POST['password_confirm'];
+  if(!empty($_POST['password_confirm']) AND md5($_POST['password_confirm']) == $password){
+    $password_confirm = md5($_POST['password_confirm']);
   }else{
     $msg .= "Die Passwörter stimmen nicht überein";
     $registrierungsdaten_korrekt = false;

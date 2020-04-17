@@ -53,11 +53,18 @@ function get_user_by_id($id){
 }
 
 function email_vergeben($email){
-	$db = get_db_connection(); // DB-Verbindung herstellen (s. login())
+	$db = get_db_connection();
 	$sql = "SELECT * FROM Benutzerdaten where email = '$email';";
 	$result = $db->query($sql);
 	if($result->rowCount() > 0){
 		return true;
 	};
 	return false;
+}
+
+function edit_data($email, $firstname, $lastname){
+	$db = get_db_connection();
+	$sql = "UPDATE Benutzerdaten SET email=?, firstname=?, lastname=? WHERE id='$id';";
+	$stmt = $db->prepare($sql);
+	return $stmt->execute(array($email, $firstname, $lastname));
 }
